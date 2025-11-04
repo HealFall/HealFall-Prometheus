@@ -1,6 +1,6 @@
 import { InfoCircleFilled, UploadOutlined } from "@ant-design/icons";
 import { Button, message, Modal, Upload } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./BatchImportModal.less";
 
 /** Tips相关 */
@@ -55,6 +55,12 @@ const BatchImportModal = ({
   maxSize,
   multiple = true,
 }: ImportModalProps) => {
+  useEffect(() => {
+    if (open) {
+      setFileList([]);
+    }
+  }, [open]);
+
   // 对宽度进行处理
   const widthAfterHandle = typeof width === "number" ? `${width}px` : width;
 
@@ -87,6 +93,7 @@ const BatchImportModal = ({
 
   const uploadAttr = {
     name: "file",
+    fileList: fileList,
     accept,
     beforeUpload: (file: any) => {
       // maxCount 校验
@@ -163,7 +170,11 @@ const BatchImportModal = ({
             </ol>
           </div>
         </div>
-        <Dragger {...uploadAttr} style={{ marginTop: "10px" }}>
+        <Dragger
+          {...uploadAttr}
+          fileList={fileList}
+          style={{ marginTop: "10px" }}
+        >
           <UploadOutlined className="upload-icon" />
           <p className="upload-text">点击或将文件拖拽到此处进行上传</p>
           <p className="upload-hint">
