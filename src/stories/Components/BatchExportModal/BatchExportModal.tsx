@@ -58,7 +58,7 @@ const BatchExportModal = ({
         <Alert
           message="导出说明"
           description={
-            <ol style={{ paddingBottom: "20px" }}>
+            <ol style={{ paddingInlineStart: "20px" }}>
               {tips.map((tip, index) => (
                 <li key={index} style={{ listStyle: "decimal" }}>
                   {tip}
@@ -66,6 +66,8 @@ const BatchExportModal = ({
               ))}
             </ol>
           }
+          type="info"
+          showIcon
         />
         <div style={{ marginTop: "10px" }}>{filter}</div>
       </Modal>

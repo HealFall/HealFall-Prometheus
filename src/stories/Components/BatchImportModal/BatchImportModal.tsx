@@ -1,7 +1,6 @@
-import { InfoCircleFilled, UploadOutlined } from "@ant-design/icons";
-import { Button, message, Modal, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { Alert, Button, message, Modal, Upload } from "antd";
 import { useState, useEffect } from "react";
-import "./BatchImportModal.less";
 
 /** Tips相关 */
 export interface TipsProps {
@@ -14,7 +13,7 @@ export interface UploadProps {
   /** 文件格式限制 */
   fileFormat: string[];
   /** 上传文件函数 */
-  onUpload: (options: any) => any;
+  onUpload: (options: any[]) => any;
   /** 上传数量限制 */
   maxCount?: number;
   /** 文件大小限制，单位为MB */
@@ -77,12 +76,6 @@ const BatchImportModal = ({
     .map((format) => (format.startsWith(".") ? format : `.${format}`))
     .join(",");
 
-  if (template) {
-    if (!onDownload) {
-      throw new Error("当template为true时，onDownload为必填项");
-    }
-  }
-
   // 当显示“下载模版”按钮时，onDownload必填
   if (template && !onDownload) {
     throw new Error("当template为true时，onDownload为必填项");
@@ -95,9 +88,9 @@ const BatchImportModal = ({
     name: "file",
     fileList: fileList,
     accept,
-    beforeUpload: (file: any) => {
+    beforeUpload: () => {
       // maxCount 校验
-      if (fileList.length >= maxCount) {
+      if (maxCount && fileList.length >= maxCount) {
         message.error(`最多只能上传 ${maxCount} 个文件`);
         return Upload.LIST_IGNORE;
       }
@@ -105,7 +98,7 @@ const BatchImportModal = ({
       // maxSize 校验（MB）
       if (
         maxSize &&
-        fileList.some((file) => file.size > maxSize * 1024 * 1024)
+        fileList.some((file: any) => file.size > maxSize * 1024 * 1024)
       ) {
         message.error(`文件大小不能超过 ${maxSize}MB`);
         return Upload.LIST_IGNORE;
@@ -113,11 +106,11 @@ const BatchImportModal = ({
 
       return false;
     },
-    onChange(info: any) {
-      setFileList(info.fileList);
+    onChange(values: any) {
+      setFileList(values.fileList);
     },
-    onRemove(file: any) {
-      setFileList((prev) => prev.filter((f) => f.uid !== file.uid));
+    onRemove(values: any) {
+      setFileList(fileList.filter((file: any) => file.uid !== values.uid));
       return true;
     },
     onDrop(e: any) {
@@ -155,29 +148,26 @@ const BatchImportModal = ({
           </>
         }
       >
-        <div className="tips-container">
-          <div className="title">
-            <InfoCircleFilled style={{ color: "rgb(24,144,255)" }} />
-            <div className="title-text">导入说明</div>
-          </div>
-          <div className="content">
-            <ol>
+        <Alert
+          message="导入说明"
+          description={
+            <ol style={{ paddingInlineStart: "20px" }}>
               {tips.map((tip, index) => (
-                <li className="lis" key={index}>
+                <li key={index} style={{ listStyle: "decimal" }}>
                   {tip}
                 </li>
               ))}
             </ol>
-          </div>
-        </div>
-        <Dragger
-          {...uploadAttr}
-          fileList={fileList}
-          style={{ marginTop: "10px" }}
-        >
-          <UploadOutlined className="upload-icon" />
-          <p className="upload-text">点击或将文件拖拽到此处进行上传</p>
-          <p className="upload-hint">
+          }
+          type="info"
+          showIcon
+        />
+        <Dragger {...uploadAttr} style={{ marginTop: "10px" }}>
+          <UploadOutlined
+            style={{ fontSize: "32px", color: "rgb(24,144,255)" }}
+          />
+          <p style={{ fontSize: "16px" }}>点击或将文件拖拽到此处进行上传</p>
+          <p style={{ color: "gray" }}>
             支持{maxCount === 1 ? "单个文件" : "文件批量"}上传，仅支持
             {accept}等格式
           </p>
