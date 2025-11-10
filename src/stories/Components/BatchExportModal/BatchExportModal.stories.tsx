@@ -3,6 +3,8 @@ import BatchExportModal from "./BatchExportModal.tsx";
 import { useState } from "react";
 import { Button, Form, Select } from "antd";
 
+const { Option } = Select;
+
 const meta = {
   title: "Components/BatchExportModal",
   component: BatchExportModal,
@@ -10,6 +12,13 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  argTypes: {
+    width: {
+      table: {
+        type: { summary: "number | string" },
+      },
+    },
+  },
 } satisfies Meta<typeof BatchExportModal>;
 
 export default meta;
@@ -26,17 +35,17 @@ export const Demo = () => {
     <Form form={form}>
       <Form.Item label="年度" name="year">
         <Select defaultValue={"all"}>
-          <option value="all">全部</option>
-          <option value="2023">2023年</option>
-          <option value="2022">2022年</option>
+          <Option value="all">全部</Option>
+          <Option value="2023">2023年</Option>
+          <Option value="2022">2022年</Option>
         </Select>
       </Form.Item>
       <Form.Item label="部门" name="department">
         <Select defaultValue={"all"}>
-          <option value="all">全部</option>
-          <option value="hr">人力资源部</option>
-          <option value="it">信息技术部</option>
-          <option value="sales">销售部</option>
+          <Option value="all">全部</Option>
+          <Option value="hr">人力资源部</Option>
+          <Option value="it">信息技术部</Option>
+          <Option value="sales">销售部</Option>
         </Select>
       </Form.Item>
     </Form>
@@ -51,6 +60,7 @@ export const Demo = () => {
       <Button type="primary" onClick={() => setOpen(true)}>
         打开弹窗
       </Button>
+      {/* 使用样例 */}
       <BatchExportModal
         open={open}
         onClose={() => setOpen(false)}

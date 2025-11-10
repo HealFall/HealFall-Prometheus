@@ -1,7 +1,5 @@
-import { InfoCircleFilled } from "@ant-design/icons";
-import { Button, Modal } from "antd";
+import { Alert, Button, Modal } from "antd";
 import type { ReactNode } from "react";
-import "./BatchExportModal.less";
 
 /** Modal相关 */
 export interface ExportModalProps {
@@ -27,7 +25,7 @@ const BatchExportModal = ({
   onClose,
   title = "批量导出",
   width = "600px",
-  tips,
+  tips = [],
   filter = null,
   onExport,
 }: ExportModalProps) => {
@@ -57,21 +55,18 @@ const BatchExportModal = ({
           </>
         }
       >
-        <div className="tips-container">
-          <div className="title">
-            <InfoCircleFilled style={{ color: "rgb(24,144,255)" }} />
-            <div className="title-text">导出说明</div>
-          </div>
-          <div className="content">
-            <ol>
+        <Alert
+          message="导出说明"
+          description={
+            <ol style={{ paddingBottom: "20px" }}>
               {tips.map((tip, index) => (
-                <li className="lis" key={index}>
+                <li key={index} style={{ listStyle: "decimal" }}>
                   {tip}
                 </li>
               ))}
             </ol>
-          </div>
-        </div>
+          }
+        />
         <div style={{ marginTop: "10px" }}>{filter}</div>
       </Modal>
     </>
