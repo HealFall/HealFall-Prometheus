@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react-vite";
 import BatchImportModal from "./BatchImportModal.tsx";
 import { useState } from "react";
-import { Button, message } from "antd";
+import { Button } from "antd";
 
 const meta = {
   title: "Components/BatchImportModal",
