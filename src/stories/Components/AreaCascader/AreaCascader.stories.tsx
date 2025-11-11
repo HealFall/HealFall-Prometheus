@@ -1,12 +1,12 @@
-import "@/styles/global.less";
 import type { Meta } from "@storybook/react-vite";
-import EthnicSelect from "./EthnicSelect";
+import AreaCascader from "./AreaCascader";
 import { useState } from "react";
+import "@/styles/global.less";
 import { Button, Form } from "antd";
 
 const meta = {
-  title: "组件/民族下拉选择框",
-  component: EthnicSelect,
+  title: "组件/地区级联选择框",
+  component: AreaCascader,
   parameters: {
     layout: "centered",
   },
@@ -18,23 +18,23 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof EthnicSelect>;
+} satisfies Meta<typeof AreaCascader>;
 
 export default meta;
 
 export const Default = {
-  name: "EthnicSelect",
+  name: "AreaCascader",
   render: () => {
-    const [value, setValue] = useState<string>();
-    const onChange = (value: string) => {
+    const [value, setValue] = useState<string[]>();
+    const onChange = (value: string[]) => {
       setValue(value);
     };
     return (
       <>
         <div className="content-display">
-          你选择的内容是： {value ? value : "未选择"}
+          你选择的内容是： {value ? value.join(" / ") : "未选择"}
         </div>
-        <EthnicSelect value={value} onChange={onChange} />
+        <AreaCascader value={value} onChange={onChange} />
       </>
     );
   },
@@ -44,24 +44,25 @@ export const FormUse = {
   name: "表单中使用",
   render: () => {
     const [form] = Form.useForm();
-    const [value, setValue] = useState<string>();
+    const [value, setValue] = useState<string[]>();
     const handleSubmit = () => {
       form.validateFields().then((values) => {
-        setValue(values.ethnic);
+        setValue(values.area);
       });
     };
+
     return (
       <>
         <div className="content-display">
-          你选择的内容是： {value ? value : "未选择"}
+          你选择的内容是： {value ? value.join(" / ") : "未选择"}
         </div>
         <Form form={form}>
           <Form.Item
-            label="民族"
-            name="ethnic"
-            rules={[{ required: true, message: "请选择民族" }]}
+            label="地区"
+            name="area"
+            rules={[{ required: true, message: "请选择地区" }]}
           >
-            <EthnicSelect />
+            <AreaCascader />
           </Form.Item>
           <Form.Item label={null}>
             <Button type="primary" onClick={handleSubmit}>

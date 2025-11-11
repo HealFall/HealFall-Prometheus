@@ -39,7 +39,7 @@ export interface ImportModalProps extends TipsProps, UploadProps {
 }
 
 const { Dragger } = Upload;
-/** 批量导入弹窗 */
+/** 批量导入弹窗 BatchImportModal */
 const BatchImportModal = ({
   open,
   onClose,

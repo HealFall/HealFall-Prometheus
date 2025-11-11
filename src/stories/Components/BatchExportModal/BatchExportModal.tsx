@@ -19,7 +19,7 @@ export interface ExportModalProps {
   onExport: () => void;
 }
 
-/** 批量导出弹窗 */
+/** 批量导出弹窗 BatchExportModal */
 const BatchExportModal = ({
   open,
   onClose,

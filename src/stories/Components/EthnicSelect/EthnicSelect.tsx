@@ -71,6 +71,7 @@ export interface EthnicSelectProps {
   width?: number | string;
 }
 
+/** 民族选择框 EthnicSelect */
 const EthnicSelect = ({
   value,
   onChange,
