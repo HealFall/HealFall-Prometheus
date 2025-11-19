@@ -21,6 +21,7 @@ export interface StatisticCardProps {
   imageSrc?: string;
 }
 
+/** 数据统计卡片（单个） */
 const StatisticCard = ({
   title,
   value,

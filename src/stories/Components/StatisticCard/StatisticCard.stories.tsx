@@ -10,6 +10,23 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  argTypes: {
+    value: {
+      table: {
+        type: { summary: "number | string" },
+      },
+    },
+    prefix: {
+      table: {
+        type: { summary: "string | JSX.Element" },
+      },
+    },
+    suffix: {
+      table: {
+        type: { summary: "string | JSX.Element" },
+      },
+    },
+  },
 } satisfies Meta<typeof StatisticCard>;
 
 export default meta;
