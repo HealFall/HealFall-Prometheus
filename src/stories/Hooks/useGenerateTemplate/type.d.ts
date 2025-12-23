@@ -1,4 +1,5 @@
 import type { ProColumns } from "@ant-design/pro-components";
+import type { FormInstance } from "antd/lib";
 
 export enum OperationTypeEnum {
   ADD = "add",
@@ -9,8 +10,34 @@ export enum OperationTypeEnum {
 
 // 列配置
 interface TemplateColumnsType extends ProColumns {
-  /** Descriptions 占据的列数 */
+  title: string;
+  dataIndex: string;
+  valueEnum?: any;
   span?: number;
+  formSpan?: number;
+  valueType?:
+    | "input"
+    | "select"
+    | "date"
+    | "dateRange"
+    | "time"
+    | "timeRange"
+    | "dateTime"
+    | "dateTimeRange"
+    | "dateWeek"
+    | "dateWeekRange"
+    | "dateMonth"
+    | "dateMonthRange"
+    | "dateQuarter"
+    | "dateQuarterRange"
+    | "dateYear"
+    | "dateYearRange"
+    | "digit"
+    | "money"
+    | "textArea";
+  formItemProps?: any;
+  fieldProps?: any;
+  renderFormItem?: any;
 }
 
 // 表格
@@ -49,6 +76,8 @@ export interface TableProps {
   options?: false | object;
   /** 分页配置 */
   pagination?: false | object;
+  /** 工具栏渲染 */
+  toolBarRenders?: React.ReactNode[];
 }
 
 // 详情
@@ -59,8 +88,6 @@ export interface DetailProps {
   detailShowType?: "drawer" | "modal";
   /** 详情标题 */
   detailTitle?: string | ((record: any) => string);
-  /** 详情数据源 */
-  detailDataSource?: any;
   /** 详情列数 */
   detailColumn?: number;
   /** 详情宽度 */
@@ -75,4 +102,32 @@ export interface DeleteProps {
   deleteTips?: string | ((record: any) => string);
   /** 删除回调 */
   onDelete?: (record: any) => void;
+}
+
+// 新增/编辑公共属性
+interface CommonProps {
+  /** 新增/编辑弹窗宽度 */
+  addOrEditWidth?: number | string;
+  /** 新增/编辑表单布局 */
+  formLayout?: "horizontal" | "vertical" | "inline";
+}
+
+// 新增
+export interface AddProps extends CommonProps {
+  /** 是否有新增 */
+  useAdd?: boolean;
+  /** 新增标题 */
+  addTitle?: string;
+  /** 新增回调 */
+  onAdd?: (form: FormInstance<any>) => void;
+}
+
+// 编辑
+export interface EditProps extends CommonProps {
+  /** 是否有编辑 */
+  useEdit?: boolean;
+  /** 编辑标题 */
+  editTitle?: string | ((record: any) => string);
+  /** 编辑回调 */
+  onEdit?: (form: FormInstance<any>) => void;
 }

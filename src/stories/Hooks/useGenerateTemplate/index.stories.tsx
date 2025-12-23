@@ -6,6 +6,12 @@ const meta: Meta = {
   title: "通用Hooks/useGenerateTemplate",
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "基于`Ant Design Pro`的`ProTable`和`ProDescriptions`，封装的通用模板生成 Hook，支持表格展示、详情查看和删除操作等功能，简化开发流程，提高效率。",
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes,
