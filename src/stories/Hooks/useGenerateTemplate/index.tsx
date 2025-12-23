@@ -84,14 +84,14 @@ const useGenerateTemplate = ({
   const actionRef = useRef<ActionType>(null);
   const [currentRow, setCurrentRow] = useState<any>();
   // 列配置
-  const allColumns = [
-    ...columns,
+  const operateColumns = [
     {
       title: "操作",
       dataIndex: "operation",
       fixed: "right" as const,
       width: operationWidth,
       hideInSearch: true,
+      hideInTable: !(useDetail || useEdit || useDelete || operationColumns),
       render: (_: any, record: any) => (
         <Flex gap={16}>
           {useDetail && (
@@ -145,7 +145,7 @@ const useGenerateTemplate = ({
         rowKey={rowKey}
         formRef={formRef}
         actionRef={actionRef}
-        columns={allColumns as any}
+        columns={[...columns, ...operateColumns] as any}
         dataSource={dataSource}
         request={request}
         params={params}

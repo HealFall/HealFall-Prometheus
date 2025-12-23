@@ -114,6 +114,15 @@ const argTypes: any = {
       category: "hooks/函数参数/表格配置",
     },
   },
+  toolBarRenders: {
+    description: "工具栏自定义渲染内容",
+    table: {
+      type: {
+        summary: "React.ReactNode[]",
+      },
+      category: "hooks/函数参数/表格配置",
+    },
+  },
 
   // 详情相关
   useDetail: {
@@ -212,7 +221,103 @@ const argTypes: any = {
     },
   },
 
-  // 删除相关
+  // 新增/编辑公共配置
+  addOrEditWidth: {
+    description: "新增/编辑弹窗的宽度",
+    table: {
+      type: {
+        summary: "number | string",
+      },
+      defaultValue: {
+        summary: 600,
+      },
+      category: "hooks/函数参数/新增、编辑公用配置",
+    },
+  },
+  formLayout: {
+    description: "新增/编辑表单布局",
+    table: {
+      type: {
+        summary: '"horizontal" | "vertical" | "inline"',
+      },
+      defaultValue: {
+        summary: "vertical",
+      },
+      category: "hooks/函数参数/新增、编辑公用配置",
+    },
+  },
+
+  // 新增相关
+  useAdd: {
+    description: "是否启用新增功能",
+    table: {
+      type: {
+        summary: "boolean",
+      },
+      defaultValue: {
+        summary: true,
+      },
+      category: "hooks/函数参数/新增配置",
+    },
+  },
+  addTitle: {
+    description: "新增弹窗标题",
+    table: {
+      type: {
+        summary: "string",
+      },
+      defaultValue: {
+        summary: "新增",
+      },
+      category: "hooks/函数参数/新增配置",
+    },
+  },
+  onAdd: {
+    description: "新增回调函数；useAdd 为 true 时必填",
+    table: {
+      type: {
+        summary: "(form: FormInstance<any>) => void",
+      },
+      category: "hooks/函数参数/新增配置",
+    },
+  },
+
+  // 编辑相关
+  useEdit: {
+    description: "是否启用操作列中的编辑功能",
+    table: {
+      type: {
+        summary: "boolean",
+      },
+      defaultValue: {
+        summary: true,
+      },
+      category: "hooks/函数参数/编辑配置",
+    },
+  },
+  editTitle: {
+    description: "编辑弹窗标题，支持字符串或函数",
+    table: {
+      type: {
+        summary: "string | (record: any) => string",
+      },
+      defaultValue: {
+        summary: "编辑",
+      },
+      category: "hooks/函数参数/编辑配置",
+    },
+  },
+  onEdit: {
+    description: "编辑回调函数；useEdit 为 true 时必填",
+    table: {
+      type: {
+        summary: "(form: FormInstance<any>) => void",
+      },
+      category: "hooks/函数参数/编辑配置",
+    },
+  },
+
+  // TemplateColumnsType 类型定义
   TemplateColumnsType: {
     description:
       "表格列的类型，继承自`ProColumns`，在满足ProTable正常使用的同时，额外新增了几个属性",
@@ -223,10 +328,63 @@ const argTypes: any = {
       category: "type/类型定义/表格列",
     },
   },
+  title: {
+    description: "同ProTable",
+    table: {
+      category: "type/类型定义/表格列",
+    },
+  },
+  dataIndex: {
+    description: "同ProTable",
+    table: {
+      category: "type/类型定义/表格列",
+    },
+  },
+  valueEnum: {
+    description: "同ProTable",
+    table: {
+      category: "type/类型定义/表格列",
+    },
+  },
+  renderFormItem: {
+    description: "自定义表单项渲染，同ProTable",
+    table: {
+      category: "type/类型定义/表格列",
+    },
+  },
   span: {
     description: "Descriptions中所占列数",
     table: {
       type: { summary: "number" },
+      category: "type/类型定义/表格列",
+    },
+  },
+  formSpan: {
+    descriptions: "表单中所占栅格数",
+    table: {
+      type: { summary: "number" },
+      category: "type/类型定义/表格列",
+    },
+  },
+  valueType: {
+    description: "表单项类型",
+    table: {
+      type: {
+        summary:
+          '"input" | "select" | "date" | "dateRange" | "time" | "timeRange" | "dateTime" | "dateTimeRange" | "dateWeek" | "dateWeekRange" | "dateMonth" | "dateMonthRange" | "dateQuarter" | "dateQuarterRange" | "dateYear" | "dateYearRange" | "digit" | "money" | "textArea"',
+      },
+      category: "type/类型定义/表格列",
+    },
+  },
+  formItemProps: {
+    description: "表单项配置，同Ant Design Form.Item",
+    table: {
+      category: "type/类型定义/表格列",
+    },
+  },
+  fieldProps: {
+    description: "表单控件配置，同Ant Design Form组件的属性",
+    table: {
       category: "type/类型定义/表格列",
     },
   },
