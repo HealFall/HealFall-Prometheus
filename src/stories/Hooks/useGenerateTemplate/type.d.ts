@@ -92,6 +92,8 @@ export interface DetailProps {
   detailColumn?: number;
   /** 详情宽度 */
   detailWidth?: number | string;
+  /** 详情请求数据 */
+  getDetail?: (record: any) => Promise<object>;
 }
 
 // 删除
@@ -101,7 +103,7 @@ export interface DeleteProps {
   /** 删除提示语 */
   deleteTips?: string | ((record: any) => string);
   /** 删除回调 */
-  onDelete?: (record: any) => void;
+  onDelete?: (record: any) => Promise<void>;
 }
 
 // 新增/编辑公共属性
@@ -119,7 +121,7 @@ export interface AddProps extends CommonProps {
   /** 新增标题 */
   addTitle?: string;
   /** 新增回调 */
-  onAdd?: (form: FormInstance<any>) => void;
+  onAdd?: (form: FormInstance<any>) => Promise<void>;
 }
 
 // 编辑
@@ -129,5 +131,5 @@ export interface EditProps extends CommonProps {
   /** 编辑标题 */
   editTitle?: string | ((record: any) => string);
   /** 编辑回调 */
-  onEdit?: (form: FormInstance<any>) => void;
+  onEdit?: (record: any, form: FormInstance<any>) => Promise<void>;
 }

@@ -1,6 +1,8 @@
 import type { Meta } from "@storybook/react";
 import useGenerateTemplate from ".";
 import argTypes from "./doc";
+import { Button } from "antd";
+import type { ProFormInstance } from "@ant-design/pro-components";
 
 const meta: Meta = {
   title: "通用Hooks/useGenerateTemplate",
@@ -38,6 +40,10 @@ export const Default = {
         title: "年龄",
         dataIndex: "age",
         render: (text: any) => <span>{text} 岁</span>,
+      },
+      {
+        title: "地址",
+        dataIndex: "address",
       },
     ];
 
@@ -78,7 +84,36 @@ export const Default = {
       });
     };
 
-    const { actionRef, Template } = useGenerateTemplate({
+    // 获取详情回调
+    const getDetail = async (record: any) => {
+      console.log("获取详情记录：", record);
+      // 模拟获取详情操作
+      return new Promise<any>((resolve) => {
+        setTimeout(() => {
+          resolve({
+            id: 3,
+            name: "HEALFALL",
+            age: "28",
+            birthday: "1995-05-15",
+            gender: "1",
+            address: "北京市朝阳区幸福大街100号",
+          });
+        }, 1000);
+      });
+    };
+
+    // 删除操作回调
+    const onDelete = async (record: any) => {
+      console.log("删除记录：", record);
+      // 模拟删除操作
+      return new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
+    };
+
+    const { Template } = useGenerateTemplate({
       rowKey: (record) => `${record.id}-${record.name}`,
       columns,
       dataSource,
@@ -92,21 +127,37 @@ export const Default = {
       // search: false,
       // options: false,
       // pagination: false,
+      toolBarRenders: [
+        <Button key="export" onClick={() => console.log("自定义导出操作")}>
+          自定义导出
+        </Button>,
+      ],
 
-      // 详情相关
       // useDetail: false,
       // detailShowType: "drawer",
       // detailTitle: (record: any) =>
       //   `用户详情 - ${record?.name ? record?.name : ""}`,
       // detailWidth: 600,
       // detailColumn: 2,
+      getDetail,
 
-      // 删除相关
       // useDelete: false,
       // deleteTips: "确定要删除该人吗？",
-      onDelete: (record: any) => {
-        console.log("删除数据：", record);
-        actionRef.current?.reload();
+      onDelete,
+
+      // useAdd: false,
+      // addTitle: "新增用户",
+      onAdd: async (form: ProFormInstance) => {
+        const values = await form.validateFields();
+        console.log("新增数据：", values);
+      },
+
+      // useEdit: false,
+      // editTitle: (record: any) =>
+      //   `编辑用户 - ${record?.name ? record?.name : ""}`,
+      onEdit: async (record: any, form: ProFormInstance) => {
+        const values = await form.validateFields();
+        console.log("编辑数据：", { id: record.id, ...values });
       },
     });
 
