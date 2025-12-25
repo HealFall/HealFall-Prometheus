@@ -116,8 +116,8 @@ export const Default = {
     const { Template } = useGenerateTemplate({
       rowKey: (record) => `${record.id}-${record.name}`,
       columns,
-      dataSource,
-      // request,
+      // dataSource,
+      request,
       // params: { status: "active" },
       operationColumns: (record: any) => (
         <a onClick={() => console.log(record)}> 自定义操作</a>

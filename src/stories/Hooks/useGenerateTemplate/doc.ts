@@ -185,6 +185,15 @@ const argTypes: any = {
       category: "hooks/函数参数/详情配置",
     },
   },
+  getDetail: {
+    description: "获取详情数据的回调函数；useDetail 为 true 时必填",
+    table: {
+      type: {
+        summary: "(record: any) => Promise<object>",
+      },
+      category: "hooks/函数参数/详情配置",
+    },
+  },
 
   // 删除相关
   useDelete: {
@@ -215,7 +224,7 @@ const argTypes: any = {
     description: "删除回调函数；useDelete 为 true 时必填",
     table: {
       type: {
-        summary: "(record: any) => void",
+        summary: "(record: any) => Promise<void>",
       },
       category: "hooks/函数参数/删除配置",
     },
@@ -276,7 +285,7 @@ const argTypes: any = {
     description: "新增回调函数；useAdd 为 true 时必填",
     table: {
       type: {
-        summary: "(form: FormInstance<any>) => void",
+        summary: "(form: FormInstance<any>) => Promise<void>",
       },
       category: "hooks/函数参数/新增配置",
     },
@@ -311,7 +320,7 @@ const argTypes: any = {
     description: "编辑回调函数；useEdit 为 true 时必填",
     table: {
       type: {
-        summary: "(form: FormInstance<any>) => void",
+        summary: "(record:any, form: FormInstance<any>) => Promise<void>",
       },
       category: "hooks/函数参数/编辑配置",
     },

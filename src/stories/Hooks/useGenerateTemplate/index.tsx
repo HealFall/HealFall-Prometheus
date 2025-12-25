@@ -39,7 +39,7 @@ dayjs.locale("zh-cn");
 const useGenerateTemplate = ({
   rowKey,
   columns,
-  dataSource = [],
+  dataSource,
   request,
   params = {},
   operationColumns,

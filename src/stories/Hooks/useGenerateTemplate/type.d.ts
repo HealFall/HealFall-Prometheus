@@ -1,5 +1,6 @@
 import type { ProColumns } from "@ant-design/pro-components";
 import type { FormInstance } from "antd/lib";
+import type { SortOrder } from "antd/es/table/interface";
 
 export enum OperationTypeEnum {
   ADD = "add",
