@@ -37,12 +37,18 @@ export const Default = {
           2: "女",
         },
         formSpan: 12,
+        valueType: "select",
       },
       {
         title: "年龄",
         dataIndex: "age",
         render: (text: any) => <span>{text} 岁</span>,
         formSpan: 12,
+        valueType: "digit",
+        fieldProps: {
+          min: 0,
+          precision: 0,
+        },
       },
       {
         title: "地址",
